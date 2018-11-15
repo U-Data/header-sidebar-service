@@ -1,6 +1,6 @@
 # Project Name
 
-> Project description
+> The header and the sidebar module that displays course information
 
 ## Related Projects
 
@@ -9,30 +9,34 @@
   - https://github.com/teamName/repo
   - https://github.com/teamName/repo
 
-## Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-
 ## Usage
-
-> Some usage instructions
+1. Start database in terminal: mysql.server start
+2. In a separate tab in terminal, seed database
+```npm run seed```
+3. In a separate tab in terminal, run server: 
+```npm start```
+4. In a separate tab in terminal, run webpack: 
+```npm run build```
+5. hosted on localhost:3003
 
 ## Requirements
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+1. Install dependies: npm install
+2. Have >=mysql 5.7.23 downloaded
 
-- Node 6.13.0
-- etc
+##API Routes:
 
-## Development
+| Route/endpoint             | Description                          | Method  |
+| -------------------------- |:------------------------------------:| -------:|
+| /courses/:id/              | get all data for a single course     | GET     |
+| /courses/                  | get all data for all courses         | GET     |
+| /courses/:id/              | delete all data for a single course  | DELETE  |
+| /courses/:id/              | update data for a single course      | PATCH   |
+| /courses/                  | add a new course                     | POST    |
 
 ### Installing Dependencies
 
 From within the root directory:
 
 npm install
-npm run seed
-npm run build
-nom start
+
