@@ -1,4 +1,4 @@
-# Project Name
+# U-Data
 
 > The header and the sidebar module that displays course information
 
