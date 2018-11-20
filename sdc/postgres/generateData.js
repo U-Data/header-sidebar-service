@@ -108,6 +108,8 @@ const tagLabel = ['Best Seller', 'Highest Rated', 'Hot & New', 'New', null];
 
 const languages = ['English', 'English, Spanish', 'English, Mandarin', 'English, Korean', 'English, Japanese'];
 
+const cc = ['English', 'Spanish', 'Mandarin', 'Korean', 'Japanese', 'German', 'Russian', 'French', 'Italian'];
+
 const generateRandomNumberWithDecimal = (min, max) => { 
   return Number(Math.random() * (max - min) + min).toFixed(1);
 };
@@ -123,6 +125,11 @@ const generateYear = (min, max) => {
 const generateCoupon = () => {
   const randomNumber = generateWholeNumber(1, 20);
   return randomNumber >= 10 ? 'ILOVEUDEMO' : '';
+};
+
+const randomSliceFromArray = (arr) => {
+  const randomNumber = generateWholeNumber(1, arr.length);
+  return arr.slice(randomNumber);
 };
 
 const generateCourseData = () => {
@@ -142,8 +149,9 @@ const generateCourseData = () => {
   const totalArticles = generateWholeNumber(1, 15);
   const totalDownloads = generateWholeNumber(3, 10000);
   const activeCoupon = generateCoupon();
+  const ccOptions = randomSliceFromArray(cc);
   // add cc options;
-  const courseData = `${title}\t${description}\t${tag}\t${avgRating}\t${totalRatings}\t${enrollment}\t${createdBy}\t${lastUpdated}\t${language}\t${imgUrl}\t${listPrice}\t${discountPrice}\t${videoHrs}\t${totalArticles}\t${totalDownloads}\t${activeCoupon}\n`;
+  const courseData = `${title}\t${description}\t${tag}\t${avgRating}\t${totalRatings}\t${enrollment}\t${createdBy}\t${lastUpdated}\t${language}\t${imgUrl}\t${listPrice}\t${discountPrice}\t${videoHrs}\t${totalArticles}\t${totalDownloads}\t${activeCoupon}\t{${ccOptions}}\n`;
   return courseData;
 };
 
@@ -175,6 +183,7 @@ function writeTenMillionTimes(writer, numEntries) {
   write();
 }
 
+// const stream = fs.createWriteStream('seedData.tsv');
 const stream = fs.createWriteStream('seedData.tsv');
 
-writeTenMillionTimes(stream, 20);
+writeTenMillionTimes(stream, 10000000);

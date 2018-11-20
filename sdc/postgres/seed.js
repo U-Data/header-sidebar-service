@@ -1,3 +1,4 @@
+//not to use
 const path = require('path');
 const db = require('./index.js');
 
