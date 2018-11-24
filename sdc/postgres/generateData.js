@@ -132,7 +132,7 @@ const randomSliceFromArray = (arr) => {
   return arr.slice(randomNumber);
 };
 
-const generateCourseData = () => {
+const generateCourseData = (i) => {
   const title = courses[Math.floor(Math.random() * courses.length)];
   const description = faker.fake('{{lorem.sentence}} {{lorem.sentence}}');
   const tag = tagLabel[Math.floor(Math.random() * tagLabel.length)];
@@ -150,7 +150,6 @@ const generateCourseData = () => {
   const totalDownloads = generateWholeNumber(3, 10000);
   const activeCoupon = generateCoupon();
   const ccOptions = randomSliceFromArray(cc);
-  // add cc options;
   const courseData = `${title}\t${description}\t${tag}\t${avgRating}\t${totalRatings}\t${enrollment}\t${createdBy}\t${lastUpdated}\t${language}\t${imgUrl}\t${listPrice}\t${discountPrice}\t${videoHrs}\t${totalArticles}\t${totalDownloads}\t${activeCoupon}\t{${ccOptions}}\n`;
   return courseData;
 };
@@ -164,12 +163,12 @@ function writeTenMillionTimes(writer, numEntries) {
       i -= 1;
       if (i === 0) {
         // last time!
-        data = generateCourseData();
+        data = generateCourseData(i + 1);
         writer.write(data); // write data to tsv file
       } else {
         // see if we should continue, or wait
         // don’t pass the callback, because we’re not done yet.
-        data = generateCourseData();
+        data = generateCourseData(i + 1);
         ok = writer.write(data);
         console.log('loading', i);
       }
@@ -183,7 +182,6 @@ function writeTenMillionTimes(writer, numEntries) {
   write();
 }
 
-// const stream = fs.createWriteStream('seedData.tsv');
-const stream = fs.createWriteStream('seedData.tsv');
+const stream = fs.createWriteStream('sampleData100.tsv');
 
-writeTenMillionTimes(stream, 10000000);
+writeTenMillionTimes(stream, 100);

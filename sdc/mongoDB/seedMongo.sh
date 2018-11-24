@@ -1,0 +1,1 @@
+mongoimport -d udata -c headerSidebar --type tsv --file ../postgres/sampleData.tsv --fields id,title,description,tag,avg_rating,total_ratings,enrollment,created_by,last_updated,language,img_url,list_price,discount_price,video_hrs,total_articles,total_downloads,active_coupon,ccOptions
