@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3003;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/client/src/index.jsx'));
+app.use('/:id', express.static('../../public/dist'));
 
 app.get('/healthCheck', (req, res) => {
   res.status(200).send('health check ok');
