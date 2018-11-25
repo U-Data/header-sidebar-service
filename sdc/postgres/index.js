@@ -36,7 +36,8 @@ const getAllCourses = function (callback) {
 const getASingleCourse = function (courseId, callback) {
   const query = 'select * from Course where id=($1)';
   client.query(query, [courseId], (err, results) => {
-    callback(err, results.rows);
+    const singleCourse = results && results.rows ? results.rows : [];
+    callback(err, singleCourse);
   });
 };
 

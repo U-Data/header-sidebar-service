@@ -1,3 +1,4 @@
+const newRelic = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const courses = require('../postgres/index.js');
@@ -10,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/client/src/index.jsx'));
 
 app.get('/healthCheck', (req, res) => {
-  res.status(200).send('Squirtle Squad');
+  res.status(200).send('health check ok');
 });
 
 app.get('/courses', (req, res) => {

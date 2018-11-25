@@ -23,4 +23,4 @@ CREATE TABLE IF NOT EXISTS Course (
   ccOptions TEXT []
 );
 
-\COPY Course (title, description, tag, avg_rating, total_ratings, enrollment, created_by, last_updated, language, img_url, list_price, discount_price, video_hrs, total_articles, total_downloads, active_coupon, ccOptions) FROM '/Users/angelazhou/Desktop/sdc/header-sidebar-service/sdc/postgres/sampleData100.tsv' DELIMITER E'\t';
+\COPY Course (title, description, tag, avg_rating, total_ratings, enrollment, created_by, last_updated, language, img_url, list_price, discount_price, video_hrs, total_articles, total_downloads, active_coupon, ccOptions) FROM '/Users/angelazhou/Desktop/sdc/header-sidebar-service/sdc/postgres/sampleData.tsv' DELIMITER E'\t';

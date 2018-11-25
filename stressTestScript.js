@@ -1,4 +1,3 @@
-const fs = require('fs');
 const faker = require('faker');
 
 const courses = [
@@ -132,7 +131,9 @@ const randomSliceFromArray = (arr) => {
   return arr.slice(randomNumber);
 };
 
-const generateCourseData = (i) => {
+function generateRandomData(userContext, events, done) {
+  // generate data with faker
+  const id = Math.floor(Math.random() * 10000000);
   const title = courses[Math.floor(Math.random() * courses.length)];
   const description = faker.fake('{{lorem.sentence}} {{lorem.sentence}}');
   const tag = tagLabel[Math.floor(Math.random() * tagLabel.length)];
@@ -150,38 +151,29 @@ const generateCourseData = (i) => {
   const totalDownloads = generateWholeNumber(3, 10000);
   const activeCoupon = generateCoupon();
   const ccOptions = randomSliceFromArray(cc);
-  const courseData = `${title}\t${description}\t${tag}\t${avgRating}\t${totalRatings}\t${enrollment}\t${createdBy}\t${lastUpdated}\t${language}\t${imgUrl}\t${listPrice}\t${discountPrice}\t${videoHrs}\t${totalArticles}\t${totalDownloads}\t${activeCoupon}\t{${ccOptions}}\n`;
-  return courseData;
-};
-
-function writeTenMillionTimes(writer, numEntries) {
-  let i = numEntries;
-  function write() {
-    let ok = true;
-    let data;
-    do {
-      i -= 1;
-      if (i === 0) {
-        // last time!
-        data = generateCourseData(i + 1);
-        writer.write(data); // write data to tsv file
-      } else {
-        // see if we should continue, or wait
-        // don’t pass the callback, because we’re not done yet.
-        data = generateCourseData(i + 1);
-        ok = writer.write(data);
-        console.log('loading', i);
-      }
-    } while (i > 0 && ok);
-    if (i > 0) {
-      // had to stop early!
-      // write some more once it drains
-      writer.once('drain', write); // if something happens such as it doesnt write correctly, flush out everything in the stream and try writing again from where it was left out
-    }
-  }
-  write();
+  // add variables to virtual user's context
+  userContext.vars.id = id;
+  userContext.vars.title = title;
+  userContext.vars.description = description;
+  userContext.vars.tag = tag;
+  userContext.vars.avgRating = avgRating;
+  userContext.vars.totalRatings = totalRatings;
+  userContext.vars.enrollment = enrollment;
+  userContext.vars.createdBy = createdBy;
+  userContext.vars.lastUpdated = lastUpdated;
+  userContext.vars.language = language;
+  userContext.vars.imgUrl = imgUrl;
+  userContext.vars.listPrice = listPrice;
+  userContext.vars.discountPrice = discountPrice;
+  userContext.vars.videoHrs = videoHrs;
+  userContext.vars.totalArticles = totalArticles;
+  userContext.vars.totalDownloads = totalDownloads;
+  userContext.vars.activeCoupon = activeCoupon;
+  userContext.vars.ccOptions = ccOptions;
+  // execute
+  return done();
 }
 
-const stream = fs.createWriteStream('sampleData.tsv');
-
-writeTenMillionTimes(stream, 10000000);
+module.exports = {
+  generateRandomData,
+};
