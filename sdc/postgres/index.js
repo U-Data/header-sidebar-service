@@ -5,7 +5,7 @@ const client = new Client({
   database: 'udata',
   password: '',
   port: 5432, // default postgresport
-}); //sgeljhges
+}); 
 
 client.connect().then(() => console.log('PostgreSQL connected.')).catch(error => console.log(error));
 
