@@ -1,6 +1,6 @@
 const newRelic = require('newrelic');
-const redis = require('redis');
-const client = redis.createClient();
+// const redis = require('redis');
+// const client = redis.createClient();
 const express = require('express');
 const bodyParser = require('body-parser');
 const courses = require('../postgres/index.js');
