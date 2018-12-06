@@ -18,6 +18,7 @@ scenarios:
   - name: "Searching Courses By ID"
     flow: #call stressTestScript.js generateRandomData() to create the fake info
       - function: 'generateRandomData'
+      #-loop:
       - get:
           # url: "/courses/{{ id }}/header"
           url: "/courses/2/header"

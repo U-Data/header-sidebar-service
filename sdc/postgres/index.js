@@ -2,8 +2,9 @@ const { Client } = require('pg');
 
 const client = new Client({
   user: 'angelazhou', // mac username
+  host: 'ec2-18-222-113-82.us-east-2.compute.amazonaws.com',
   database: 'udata',
-  password: '',
+  password: '123',
   port: 5432, // default postgresport
 }); 
 
